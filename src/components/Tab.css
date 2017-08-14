@@ -1,0 +1,8 @@
+.tab-header {
+    display: inline;
+    margin: 10px;
+}
+
+.tab__selected {
+  font-weight: bold;
+}
