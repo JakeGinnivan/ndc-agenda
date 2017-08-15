@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`another test 1`] = `
+<div>
+  Some Talk
+  <button
+    onClick={[Function]}
+  >
+    Add to schedule
+  </button>
+</div>
+`;
+
+exports[`renders a talk correctly 1`] = `
+<div>
+  Some Talk
+  <button
+    onClick={[Function]}
+  >
+    Add to schedule
+  </button>
+</div>
+`;

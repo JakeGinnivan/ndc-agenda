@@ -19,13 +19,13 @@ const RemoveFromSchedule = ({ removeFromSchedule} ) => (
     </button>
 )
 
-const TalkRaw = ({ startTime, title, link, dispatch, schedule }) => {
+export const TalkRaw = ({ startTime, title, link, dispatch, schedule }) => {
     const scheduleButton = schedule.indexOf(link) === -1
         ? <AddToSchedule addToSchedule={() => dispatch(addToSchedule(link))} />
         : <RemoveFromSchedule removeFromSchedule={() => {}} />
     return (
         <div>
-            {title}
+            {startTime.hour}:{startTime.minutes} {title}
             {scheduleButton}
         </div>
     )
