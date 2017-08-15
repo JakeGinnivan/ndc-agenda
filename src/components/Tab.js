@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { SelectDay } from './select-day'
 import { Link, Route } from 'react-router-dom'

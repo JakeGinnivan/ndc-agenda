@@ -1,3 +1,4 @@
+// @flow
 import cheerio from 'cheerio'
 
 export const fetchAgenda = () => {

@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { Day } from './components/day'
 import { Tab } from '../../components/Tab'
