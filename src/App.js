@@ -10,16 +10,28 @@ import './App.css';
 import { Home } from './pages/home'
 import { Agenda } from './pages/agenda'
 import { Schedule } from './pages/schedule'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import appReducer from './app.redux'
+import thunk from 'redux-thunk'
 
 const existingState = localStorage.getItem('redux-state')
+
+const composeEnhancers =
+typeof window === 'object' &&
+window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+  }) : compose;
 
 const store = createStore(
   appReducer,
   existingState ? JSON.parse(existingState) : undefined,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(
+    applyMiddleware(
+      thunk
+    )
+  )
 )
 
 store.subscribe(() => {

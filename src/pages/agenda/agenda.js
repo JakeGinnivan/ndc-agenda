@@ -2,16 +2,15 @@
 import React from 'react'
 import { Day } from './components/day'
 import { Tab } from '../../components/Tab'
-import { fetchAgenda } from '../../agenda'
 import _ from 'lodash'
+import { loadTalks } from '../../app.redux'
+import { connect } from 'react-redux'
 
-export class Agenda extends React.Component {
-    state = { talks: [], selectedDay: '0' }
+class AgendaRaw extends React.Component {
+    state = { selectedDay: '0' }
 
     componentWillMount() {
-      fetchAgenda().then(talks => {
-        this.setState({ talks })
-      })
+      this.props.dispatch(loadTalks())
     }
   
     selectDay = (day) => {
@@ -21,8 +20,12 @@ export class Agenda extends React.Component {
     }
   
     render() {
-      const groups = _.groupBy(this.state.talks, talk => talk.day)
+      const groups = _.groupBy(this.props.talks, talk => talk.day)
       
+      if (this.props.loading) {
+        return <div>Loading!!</div>
+      }
+
       return (
         <Tab
             match={this.props.match}
@@ -38,5 +41,6 @@ export class Agenda extends React.Component {
       )
     }
   }
-  
-  
+
+const mapStateToProps = state => ({ talks: state.talks, loading: state.loading })
+export const Agenda = connect(mapStateToProps)(AgendaRaw)

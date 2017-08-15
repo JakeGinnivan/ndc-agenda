@@ -3,26 +3,26 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addToSchedule } from '../../../app.redux'
 
+const AddToSchedule = (props) => (
+    <button
+        onClick={props.addToSchedule}
+    >
+        Add to schedule
+    </button>
+)
+
+const RemoveFromSchedule = ({ removeFromSchedule} ) => (
+    <button
+        onClick={removeFromSchedule}
+    >
+        Remove from schedule
+    </button>
+)
+
 const TalkRaw = ({ startTime, title, link, dispatch, schedule }) => {
     const scheduleButton = schedule.indexOf(link) === -1
-        ? (
-        <button
-            onClick={() => {
-                dispatch(addToSchedule(link))
-            }}
-        >
-            Add to schedule
-        </button>
-        )
-        : (
-            <button
-            onClick={() => {
-                // dispatch(removeFromSchedule(link))
-            }}
-        >
-            Remove from schedule
-        </button>
-        )
+        ? <AddToSchedule addToSchedule={() => dispatch(addToSchedule(link))} />
+        : <RemoveFromSchedule removeFromSchedule={() => {}} />
     return (
         <div>
             {title}
@@ -31,4 +31,7 @@ const TalkRaw = ({ startTime, title, link, dispatch, schedule }) => {
     )
 }
 
-export const Talk = connect(state => ({ schedule: state.schedule }))(TalkRaw)
+const mapStateToProps = (state) => {
+    return { schedule: state.schedule }
+}
+export const Talk = connect(mapStateToProps)(TalkRaw)
