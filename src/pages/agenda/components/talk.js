@@ -7,12 +7,12 @@ const TalkRaw = ({ startTime, title, link, dispatch, schedule }) => {
     const scheduleButton = schedule.indexOf(link) === -1
         ? (
         <button
-        onClick={() => {
-            dispatch(addToSchedule(link))
-        }}
-    >
-        Add to schedule
-    </button>
+            onClick={() => {
+                dispatch(addToSchedule(link))
+            }}
+        >
+            Add to schedule
+        </button>
         )
         : (
             <button
